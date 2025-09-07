@@ -1,13 +1,11 @@
 
-Linux System Programming - 
-Talking Directly to the Kernel
+# Linux System Programming - Talking Directly to the Kernel
 
 
--- A man in the flying machine --
+> __A Man In The Flying Machine__
 
 
-
-# System Calls
+## System Calls
 
 System programming starts and ends with system calls. System calls (often shortened
 to syscalls) are function invocations made from user space - your text editor, favorite
@@ -22,7 +20,7 @@ the standard system calls with its own. Consequently, the system calls available
 architecture may differ from those available on another. Nonetheless, a very large subset
 of system calls - more than 90 percent - is implemented by all architectures.
 
-# Invoking System Calls
+## Invoking System Calls
 
 It is not possible to directly link user-space applications with kernel space. For reasons
 of security and reliability, user-space applications must not be allowed to directly execute
@@ -53,5 +51,4 @@ the C library.
 
 
 
-*Created: $(date)*
 *Whoami: Tarokh Yaghoubi*
