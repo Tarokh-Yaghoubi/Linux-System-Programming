@@ -27,10 +27,17 @@ int main() {
 
 	write(fd, buf, sizeof(buf));
 
-	dprintf(fd, "first is first");
+	dprintf(fd, "first is first\n");
 
-	// nr = read()
-	
+	nr = read(fd, &readBuffer, sizeof(readBuffer));
+	if (nr == -1) {
+		perror("read");
+		return EXIT_FAILURE;
+	}
+	printf("READ [%ld] LINES ->\n", nr);
+
+	printf("BUFFER after read() -> [%s]\n", readBuffer);
+
 
 
 	close(fd);
