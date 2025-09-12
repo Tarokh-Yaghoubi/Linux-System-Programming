@@ -35,6 +35,8 @@ int main() {
 	fd = open("file.txt", O_RDWR, 0644);
 	dprintf(fd, "first is first\n");
 
+	lseek(fd, 0, SEEK_SET);
+
 	nr = read(fd, &readBuffer, sizeof(readBuffer));
 	if (nr == -1) {
 		perror("read");
