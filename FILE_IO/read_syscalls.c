@@ -14,6 +14,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+// Using fcntl for debug 
+
+#include <fcntl.h>
+
+
 int main() {
 
 	unsigned long word;
@@ -26,14 +31,31 @@ int main() {
 	char buf[] = "last is last\n";
 
 	write(fd, buf, sizeof(buf));
-
+	close(fd);	// closing file / opening it with open() because of permissions
+	fd = open("file.txt", O_RDWR, 0644);
 	dprintf(fd, "first is first\n");
 
 	nr = read(fd, &readBuffer, sizeof(readBuffer));
 	if (nr == -1) {
 		perror("read");
+
+		int flag = fcntl(fd, F_GETFL);
+		if (flag == -1) {
+			perror("fcntl F_GETFL");
+		} else {
+			printf("FILE access mode: ");
+			// Here we get O_WRONLY cause we are opening the file using creat()
+			switch(flag & O_ACCMODE) {
+				case O_RDONLY: printf("O_RDONLY\n"); break;
+				case O_WRONLY: printf("O_WRONLY\n"); break;
+				case O_RDWR:   printf("O_RDWR\n"); break;
+			}
+			
+		}
+
 		return EXIT_FAILURE;
 	}
+
 	printf("READ [%ld] LINES ->\n", nr);
 
 	printf("BUFFER after read() -> [%s]\n", readBuffer);
