@@ -18,6 +18,8 @@
 
 #include <fcntl.h>
 
+// include errno.h to play with errno and errors 
+#include <errno.h>
 
 int main() {
 
@@ -26,15 +28,36 @@ int main() {
 
 	char readBuffer[100] = {0};
 
+	char testBuffer[10] = { 0 };
+
 	int fd = creat("file.txt", 0644);
 	
 	char buf[] = "last is last\n";
 
 	write(fd, buf, sizeof(buf));
 	close(fd);	// closing file / opening it with open() because of permissions
+	
+	fd = open("file1.txt", O_RDWR | O_NONBLOCK, 0644);
+	int numRead = read(fd, &testBuffer, sizeof(testBuffer));
+	if (numRead <= 0) {
+		// EAGAIN occures when using sockets, pipes, or devices that might have data 
+		// later.
+		if (errno == EAGAIN)
+			printf("EAGAIN is here -> ");
+		else
+			perror("read");
+		printf("NUM-READ result printed ------>>\n\n");
+	}
+
+	close(fd);
+
 	fd = open("file.txt", O_RDWR, 0644);
+
 	dprintf(fd, "first is first\n");
 
+	// I call this because the offset is no more at the beginning of the file
+	// because of dprintf()...
+	
 	lseek(fd, 0, SEEK_SET);
 
 	nr = read(fd, &readBuffer, sizeof(readBuffer));
