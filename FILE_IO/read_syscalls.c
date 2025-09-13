@@ -37,15 +37,18 @@ int main() {
 	write(fd, buf, sizeof(buf));
 	close(fd);	// closing file / opening it with open() because of permissions
 	
-	fd = open("file1.txt", O_RDWR | O_NONBLOCK, 0644);
+	fd = open("file_doesnt_exist", O_RDWR | O_NONBLOCK, 0644);
 	int numRead = read(fd, &testBuffer, sizeof(testBuffer));
 	if (numRead <= 0) {
 		// EAGAIN occures when using sockets, pipes, or devices that might have data 
 		// later.
-		if (errno == EAGAIN)
+		if (errno == EBADF) {
+			printf("EBADF detected ------>> \n");
+		} else if (errno == EAGAIN) { 
 			printf("EAGAIN is here -> ");
-		else
+		} else {
 			perror("read");
+		}
 		printf("NUM-READ result printed ------>>\n\n");
 	}
 
