@@ -5,6 +5,16 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <fcntl.h>
+
+void write_synchronously(void) {
+	char sentence[] = "some quote\n";
+	int fd = open("file.txt", O_WRONLY | O_CREAT | O_SYNC, 0644);
+	// this blocks until the data is written
+	write(fd, sentence, sizeof(sentence));
+	close(fd);
+}
+
 int main() {
 
 	// SSIZE write(int fd, const void *buf, size_t count);
