@@ -6,6 +6,24 @@
 #include <stdlib.h>
 
 #include <fcntl.h>
+#include <aio.h>
+#include <errno.h>
+
+struct aiocb cb;
+
+void aio_example(void) {
+	char data[] = "Data to be written\n";
+	int fd = open("file.txt", O_WRONLY | O_CREAT, 0644);
+	memset(&cb, 0, sizeof(struct aiocb));
+	cb.aio_fildes = fd;
+	cb.aio_buf = data;
+	cb.aio_nbytes = sizeof(data);
+	aio_write(&cb);	// this returns immediately
+	while (aio_error(&cb) == EINPROGRESS) {
+		printf("WRITING---\n");
+	}
+	close(fd);
+}
 
 void write_synchronously(void) {
 	char sentence[] = "some quote\n";
@@ -30,6 +48,9 @@ int main() {
 	nr = write(STDOUT_FILENO, buf, strlen(buf));
 	if (nr == -1)
 		perror("write");
+
+	
+	aio_example();
 
 	return EXIT_SUCCESS;
 }
