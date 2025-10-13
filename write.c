@@ -19,6 +19,7 @@ void aio_example(void) {
 	cb.aio_buf = data;
 	cb.aio_nbytes = sizeof(data);
 	aio_write(&cb);	// this returns immediately
+	
 	while (aio_error(&cb) == EINPROGRESS) {
 		printf("WRITING---\n");
 	}
