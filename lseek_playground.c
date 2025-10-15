@@ -13,6 +13,7 @@ int
 main(void) {
 
 	off_t ret;
+	char buf[] = "a";
 	int fd = open("test", O_CREAT | O_RDWR, 0644);
 	if (fd < 0) {
 		perror("open");
@@ -32,5 +33,8 @@ main(void) {
 	}
 
 	printf("LSEEK RETURN ---- -> [%ld]\n", (off_t)ret);
-
+	
+	for (int i = 0; i < 15; i+=2)
+		pwrite(fd, buf, 1, i);
 }
+
