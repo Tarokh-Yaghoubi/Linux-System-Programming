@@ -54,6 +54,48 @@ int main() {
 	}
 
 	// ARRAY OF POLLFD STRUCTURES 
+	
+	struct pollfd fds[MAX_FDS]; // one struct per file descriptor 
+	
+	int nfds = 1;	 // starts with one 
+
+	fds[0].fd = listen_fd;
+	fds[0].events = POLLIN;
+
+	printf("[POLL] server listening to port -> %d\n", PORT);
+
+
+	while (1) {
+		int ready = poll(fds, nfds, -1);
+
+		if (read == -1) {
+			if (errno == EINTR)
+				continue;
+			perror("poll");
+			break;
+		}
+
+		for (int i = 0; i < nfds; i++) {
+		
+			if (fds[i].revents == 0)
+				continue;
+
+			if (fds[i].fd == listen_fd) {
+				struct sockaddr_in client_addr;
+				socklen_t len = sizeof(client_addr);
+				int client_fd = accept(listen_fd, (struct sockaddr*)&client_addr, &len);
+				if (client_fd == -1) {
+					perror("accept");
+					continue;
+				}
+
+				char ip[INET_ADDRSTRLEN];
+
+			}
+		
+		}
+	
+	}
 
 	return 0;
 }
