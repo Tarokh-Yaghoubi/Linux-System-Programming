@@ -1,6 +1,8 @@
 
 #define _GNU_SOURCE
 
+#include <string.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -90,12 +92,52 @@ int main() {
 				}
 
 				char ip[INET_ADDRSTRLEN];
+				inet_ntop(AF_INET, &client_addr.sin_addr, ip, sizeof(ip));
+				printf("New Client: %s:%d (fd=%d)\n", ip, ntohs(client_addr.sin_port), client_fd);
+				if (nfds < MAX_FDS) {
+					fds[nfds].fd = client_fd;
+					fds[nfds].events = POLLIN;
+					nfds++;
+				} else {
+					printf("Too Many Clients ---- -> ");
+					close(client_fd);
+				}
+			} else {
+				// Client Socket: data or closed
+				if (fds[i].revents & (POLLERR | POLLHUP | POLLNVAL)) {
+					printf("Client fd=%d disconnected  or error\n", fds[i].fd);
+					close(fds[i].fd);
+					// remove from the array, shif-left
+					memmove(&fds[i], &fds[i+1], (nfds - i - 1) * sizeof(struct pollfd));
+					nfds--;
+					i--;
+					continue;
+				}
 
+				if (fds[i].revents & POLLIN) {
+					// now data is available in the new connection, read the data...
+				
+					char buf[BUF_SIZE];
+					ssize_t n = read(fds[i].fd, buf, sizeof(buf));
+					if (n <= 0) {
+						if (n == 0) 
+							printf("Client fd=%d closed\n", fds[i].fd);
+						else
+							perror("read");
+
+						close(fds[i].fd);
+						memmove(&fds[i], &fds[i+1], (nfds - i - 1) * sizeof(struct pollfd));
+						nfds--;
+						i--;
+						continue;
+					}
+
+					write(fds[i].fd, buf, n);
+				}
 			}
-		
 		}
-	
 	}
 
+	close(listen_fd);
 	return 0;
 }
