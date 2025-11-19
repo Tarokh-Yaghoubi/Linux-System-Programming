@@ -27,5 +27,11 @@ int main() {
         return EXIT_FAILURE;
     }
 
+
+    fclose(stream);
+    
+    // this closes all streams, flushes remained data, and closes the stream.
+    // on error they return EOF
+    fcloseall();
     return EXIT_SUCCESS;
 }
