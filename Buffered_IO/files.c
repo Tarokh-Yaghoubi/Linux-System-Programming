@@ -43,6 +43,9 @@ int main() {
 
     printf("BUFFER -> [%s]\n", buffer);
 
+    char buf[100];
+    my_fgets_delim(buf, sizeof(buf), ':', stdin);
+
 
     int fd = open("test", O_RDONLY);
     if (fd == -1) {
@@ -86,5 +89,5 @@ char* my_fgets_delim(char* str, int n, int d, FILE* stream) {
     }
 
     return (c == EOF && s == str) ? NULL : str;
-    
+
 }
