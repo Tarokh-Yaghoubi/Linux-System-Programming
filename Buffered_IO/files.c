@@ -31,7 +31,8 @@ int main() {
         if ((char)c == 'a')
             printf("AAAAAAAAAAAAA\n");
     }
-    fseek(stream, 0, SEEK_SET);
+    // fseek(stream, 0, SEEK_SET);
+    rewind(stream);
     char buffer[LINE_MAX];
     
     // now my stream has opened a file, so i can read its data line by line 
@@ -64,7 +65,7 @@ int main() {
     
     // this closes all streams, flushes remained data, and closes the stream.
     // on error they return EOF
-    fcloseall();
+    // fcloseall();
     return EXIT_SUCCESS;
 }
 
