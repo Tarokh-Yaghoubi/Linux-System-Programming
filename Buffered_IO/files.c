@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+#include <errno.h>
+
 #define _GNU_SOURCE
 #include <limits.h>
 
@@ -32,7 +34,11 @@ int main() {
             printf("AAAAAAAAAAAAA\n");
     }
     // fseek(stream, 0, SEEK_SET);
+    errno = 0;
     rewind(stream);
+    if (errno) {
+	perror("rewind");
+    }
     char buffer[LINE_MAX];
     
     // now my stream has opened a file, so i can read its data line by line 
