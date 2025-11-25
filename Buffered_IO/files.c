@@ -16,10 +16,12 @@ int main() {
 
     stream = fopen("/etc/manifest", "r");
     if (stream == NULL) {
-        perror("fopen");
+    	perror("fopen");
         return -1;
     } else {
         printf("CORRECT\n");
+	int fdNo = fileno(stream);
+	printf("fdNo for stream is -> [%d]\n", fdNo);
     }
     
     fseek(stream, 2, SEEK_SET);
