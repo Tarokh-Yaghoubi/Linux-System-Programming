@@ -1,0 +1,13 @@
+
+
+HERE WE WORK WITH GNU-AUTOTOOLS
+IT NEEDS A PROFESSIONAL SEPARATELY
+I JUST WANNA SEE HOW IT WORKS.
+THANKS
+
+0. Write configure.ac 
+1. aclocal -> read configure.ac file and generate aclocal.m4 and sets the macros
+2. autoconf -> generate the configure script
+3. write Makefile.am
+4. automake -> take "Makefile.am" and generate "Makefile.in"
+5. ./configure -> take the "Makefile.in" and generate the final Makefile 
