@@ -1,0 +1,9 @@
+
+
+1 - Created the configure.ac file 
+2 - Run aclocal to generate aclocal.m4
+3 - Run autoconf
+4 - Write your Makefile.am 
+5 - Run automake
+6 - Run ./configure 
+7 - Run "make dist"
