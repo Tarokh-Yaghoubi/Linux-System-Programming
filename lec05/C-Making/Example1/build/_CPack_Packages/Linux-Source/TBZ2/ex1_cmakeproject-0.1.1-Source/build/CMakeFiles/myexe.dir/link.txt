@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/myexe.dir/src/prog1.c.o -o myexe   -L/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/lib  -Wl,-rpath,/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/lib: -lc -Wl,-Bstatic -ltarokh0.1 -Wl,-Bdynamic 

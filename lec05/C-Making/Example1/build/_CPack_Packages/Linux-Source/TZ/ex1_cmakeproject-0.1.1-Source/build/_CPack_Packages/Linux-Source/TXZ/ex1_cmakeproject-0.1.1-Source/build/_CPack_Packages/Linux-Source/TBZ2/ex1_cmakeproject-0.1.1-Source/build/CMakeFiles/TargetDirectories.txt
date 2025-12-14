@@ -1,0 +1,9 @@
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/myexe.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/package.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/package_source.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/edit_cache.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/rebuild_cache.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/list_install_components.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/install.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/install/local.dir
+/home/tarokh/Linux-System-Programming/lec05/C-Making/Example1/build/CMakeFiles/install/strip.dir
