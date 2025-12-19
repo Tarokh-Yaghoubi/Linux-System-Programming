@@ -22,6 +22,9 @@
 
 ### what we can do using `\033[` in `printf()`
 `\033[m`, `reset to default settings`
+<br>
 `\033[1m`, `Bold Characters`
+<br>
 `\033[2m`, `Underline Characters`
+<br>
 `\033[7m`, `Reverse Video`
