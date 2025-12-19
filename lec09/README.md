@@ -28,3 +28,13 @@
 `\033[2m`, `Underline Characters`
 <br>
 `\033[7m`, `Reverse Video`
+<br>
+`\033[30-39m`, `Foreground Colors`
+<br>
+`\033[40-49m`, `Background Colors`
+<br>
+`\033[0K`, `Erase from cursor to end of line`
+<br>
+`\033[1K`, `Erase from start of line to the cursor`
+<br>
+`\033[2K`, `Erase Current Line`
