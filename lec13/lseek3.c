@@ -24,16 +24,25 @@ main(int argc, char* argv[]) {
         remove("filewithholes");
 
     int fd = open("filewithholes", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-    if (fd == -1) {
+    
+
+    // here i used dup() func, just to duplicate the file-descriptor of the file 
+    // as a test, these two file descriptors now point to the same file
+    // so we can read from 'fd' but write to 'dupfd', and the same file 
+    // is getting affected.
+    
+    int dupfd = dup(fd);
+
+    if (dupfd == -1) {
         perror("open");
         return -1;
     }
 
-    write(fd, "TAROKH", 6);
+    write(dupfd, "TAROKH", 6);
     for (size_t i = 0; i < holes; i++)
     {
-        lseek(fd, 10, SEEK_CUR);
-        write(fd, "TAROKH", 6);
+        lseek(dupfd, 10, SEEK_CUR);
+        write(fd, "TAROKH", 6); 
     }
 
     close(fd);
