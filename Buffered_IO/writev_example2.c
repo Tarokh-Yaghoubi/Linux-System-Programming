@@ -2,7 +2,7 @@
 #include "../headers.h"
 #include <sys/types.h>
 #include <sys/stat.h>
-
+#include <fcntl.h>
 #include <sys/uio.h>
 
 #define MAX_BUFFER 3
@@ -19,17 +19,15 @@ int main() {
 		"This is the last sentence\n"
 	};
 
-	FILE * stream = fopen("test.dat", "a+");
-	fd = fileno(stream);
-
+	fd = open("test.dat", O_RDWR | O_CREAT, 0644);
 	if (fd == -1) {
-		perror("fopen");
+		perror("open");
 		return EXIT_FAILURE;
 	}
 
 	for (int i = 0; i < MAX_BUFFER; i++) {
 		iov[i].iov_base = buf[i];
-		iov[i].iov_len = strlen(buf[i]) + 1;
+		iov[i].iov_len = strlen(buf[i]);
 	}
 
 	nr = writev(fd, iov, MAX_BUFFER);
@@ -38,8 +36,7 @@ int main() {
 		return EXIT_FAILURE;
 	}
 
-	fflush(stream);
-	fclose(stream);
+	close(fd);
 
 	return EXIT_SUCCESS;
 
