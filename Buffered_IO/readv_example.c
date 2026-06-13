@@ -22,17 +22,21 @@ main() {
 	}
 
 	iov[0].iov_base = first;
-	iov[0].iov_len = sizeof(first);
+	iov[0].iov_len = 34;
 	iov[1].iov_base = second;
-	iov[1].iov_len = sizeof(second);
+	iov[1].iov_len = 28;
 	iov[2].iov_base = third;
-	iov[2].iov_len = sizeof(third);
+	iov[2].iov_len = 26;
 
 	nr = readv(fd, iov, MAX_BUFFER);
 	if (nr < 0) {
 		perror("readv");
 		return EXIT_FAILURE;
 	}
+
+	first[34] = '\0';
+	second[28] = '\0';
+	third[26] = '\0';
 
 	for (int i = 0; i < MAX_BUFFER; i++) {
 		printf("%d-%s\n", i, (char*)iov[i].iov_base);
