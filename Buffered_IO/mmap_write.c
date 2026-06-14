@@ -16,9 +16,19 @@ main(void) {
 	printf("%d-%d\n", read_size, strlen(buffer));
 
 	// mmap way: 
-	char  * map = mmap(NULL, 100, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	char * map = mmap(NULL, 100, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	map[0] = 'G';	// this directly changes the files first byte. no write() needed.
+	
 	printf("data => [%s]\n", map);	
+	
+	int ret = munmap(map, strlen(buffer));
+	if (ret == -1) {
+		perror("munmap");
+		return EXIT_FAILURE;
+	
+	}
 	return EXIT_SUCCESS;
+
+
 }
 
