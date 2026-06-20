@@ -22,6 +22,15 @@ main(void) {
 	printf("read data ====== => [%s]\n", buffer);
 
 	char * p = mmap(NULL, 100, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+
+	// If you already know, how you are going to read 
+	// the data from the file, you can just give the 
+	// kernel an specific advise, for the sake of 
+	// efficiency.
+
+	madvise(p, 100, MADV_SEQUENTIAL);
+	// madvise(p, 100, MADV_RANDOM);
+
 	p[0] = '$';
 
 	printf("MAP DATA ====== => [%s]\n", p);
