@@ -15,6 +15,33 @@
 
 */
 
+/*
+
+	REMEMBER THIS IMAGE, FOR (CHS)
+
+outer track (track 0)
+       ╭─────────────╮
+      ╱   middle track  ╲
+     │   ╭───────────╮   │
+     │  ╱ inner track  ╲  │
+     │ │  ╭─────────╮  │ │
+     │ │ │           │ │ │
+     │ │  ╰─────────╯  │ │
+     │  ╲             ╱  │
+     │   ╰───────────╯   │
+      ╲                 ╱
+       ╰─────────────╯
+
+    ╭───╮
+  ╱ 1 │ 2 ╲
+ │ 8  │  3 │
+ │ 7  │  4 │
+  ╲ 6 │ 5 ╱
+    ╰───╯
+
+*/
+
+
 #define _GNU_SOURCE
 
 #include "../headers.h"
