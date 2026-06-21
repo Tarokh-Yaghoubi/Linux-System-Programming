@@ -28,12 +28,15 @@ main(void) {
 
 	off_t file_size = st.st_size;
 	
-	ret = posix_fadvise(fd, 0, file_size, POSIX_FADV_SEQUENTIAL);
+	ret = posix_fadvise(fd, 0, file_size, POSIX_FADV_WILLNEED);
 	if (ret < 0) {
 		perror("posix_fadvise");
 		close(fd);
 		return EXIT_FAILURE;
 	}
+
+	printf("wait for three seconds...\n");
+	sleep(3);
 
 	buffer = malloc(file_size);
 
