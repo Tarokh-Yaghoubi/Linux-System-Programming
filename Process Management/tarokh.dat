@@ -1,8 +1,7 @@
-tarokh is a moderate programmer 
-this is a programme written by me 
-i am just learning linux systems programming 
-then i shall do a couple of projects 
-and switch to GOLANG!!
+A test text
+I wanna see how fork works inside exec faimily
+and inside fork. 
 
-I am also learning deutsch! perhaps ill leave to germany someday
-and I will have a normal life with my wife and my cat
+inside fork I must also handle the else section, because fork returns two values
+
+Done!
