@@ -1,0 +1,3 @@
+First buffer is written by parent process
+Second buffer is written by the parent process as well
+Last one is from child
