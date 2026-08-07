@@ -22,6 +22,7 @@ main() {
 void * f1(void * arg) {
     for (int i = 0; i < 1000; i++)
         fprintf(stderr, "%c", 'x');
+        
     
     pthread_exit(NULL);
 }
