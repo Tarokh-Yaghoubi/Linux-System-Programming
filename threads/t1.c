@@ -2,6 +2,7 @@
 //multithreaded version of t0 programme 
 
 #include "../headers.h"
+#include "pthread.h"
 
 void * f1(void *);
 void * f2(void *);
